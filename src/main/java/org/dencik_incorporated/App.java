@@ -8,7 +8,8 @@ public class App
 {
     public static void main( String[] args )
     {
-        Wrapper wi = new Wrapper(1000);
-        System.out.println(wi.getValue());
+        Wrapper<Integer> wi = new Wrapper<>(1000);
+        Wrapper<String> ws = new Wrapper<>("abc");
+        System.out.println(ws.getValue().toUpperCase());
     }
 }

@@ -1,18 +1,18 @@
 package org.dencik_incorporated;
 
-public class Wrapper {
-    private Integer value;
+public class Wrapper<T> {
+    private T value;
 
-    public Wrapper(Integer value) {
+    public Wrapper(T value) {
         this.value = value;
     }
 
-    public Integer getValue() {
+    public T getValue() {
         return value;
     }
 
 
-    public void setValue(Integer value) {
+    public void setValue(T value) {
         this.value = value;
     }
 }
