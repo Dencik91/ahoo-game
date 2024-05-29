@@ -1,29 +1,43 @@
 package org.dencik_incorporated;
 
+import com.github.javafaker.Faker;
 import org.dencik_incorporated.entities.User;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 public class App {
     public static void main( String[] args ) {
-        List<User> users = new ArrayList<>(); //SO[L]I[D]
+        // Folosind fakerul de umplut o lista cu 10 useri
+        // de copiat toti userii numele carora incepe cu a in alta lista
+        // de afisat ambele liste
 
 
-        User user = null;
-        while(users.size()<5) {
-            users.add(new User(String.format("user %d",users.size()+1)));
-        }
-
-        for (int i = 0; i < users.size(); i++) {
-            if (users.get(i).getUserName().equals("user 3")) {
-                users.remove(i);
-                break;
-            }
-        }
+        List<User> users = createList(30);
+        List<User> usersFinal = filterList("a", users);
 
         users.forEach(System.out::println);
+        System.out.println();
+        usersFinal.forEach(System.out::println);
 
+    }
+
+    public static List<User> createList(int size) {
+        Faker faker = new Faker();
+        List<User> users = new ArrayList<>();
+        for (int i = 0; i < size; i++) {
+            users.add(new User(faker.name().username()));
+        }
+        return users;
+    }
+
+    public static List<User> filterList(String prefix, List<User> list) {
+        List<User> usersFinal = new ArrayList<>();
+        for (User user : list) {
+            if (user.getUserName().startsWith(prefix)) {
+                usersFinal.add(user);
+            }
+        }
+        return usersFinal;
     }
 }
