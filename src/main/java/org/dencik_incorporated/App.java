@@ -11,23 +11,17 @@ public class App {
         List<User> users = new ArrayList<>(); //SO[L]I[D]
 
 
-
+        User user = null;
         while(users.size()<5) {
             users.add(new User(String.format("user %d",users.size()+1)));
         }
 
-        for (User user : users) {
-            System.out.println(user);
+        for (int i = 0; i < users.size(); i++) {
+            if (users.get(i).getUserName().equals("user 3")) {
+                users.remove(i);
+                break;
+            }
         }
-        System.out.println("users: " + users.size());
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Introdu pozitia: ");
-        int i = scanner.nextInt();
-        scanner.nextLine();
-        System.out.println("Introdu username ");
-        String value = scanner.nextLine();
-
-        users.get(i).setUserName(value);
 
         users.forEach(System.out::println);
 
