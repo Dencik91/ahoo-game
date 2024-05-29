@@ -1,5 +1,7 @@
 package org.dencik_incorporated.entities;
 
+import java.util.Objects;
+
 public class User {
     private String userName;
 
@@ -22,5 +24,15 @@ public class User {
         return "User{" +
                 "userName='" + userName + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        return this.userName.equals(((User)o).getUserName());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(userName);
     }
 }
