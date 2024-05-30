@@ -24,5 +24,4 @@ public class App {
             System.out.println(Integer.toUnsignedString(player.hashCode()));
         }
     }
-    Object o;
 }
