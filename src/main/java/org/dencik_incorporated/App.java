@@ -1,27 +1,30 @@
 package org.dencik_incorporated;
 
-import com.github.javafaker.Faker;
-import org.dencik_incorporated.entities.User;
-
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.io.*;
 
 public class App {
-    public static void main( String[] args ) {
-        // create a set of unique users
-        Set<User> users = new HashSet<>();
+    public static void main( String[] args ) throws Exception {
+        final String CWD = System.getProperty("user.dir");
+        final String pathI = "\\data\\bill.txt";
+        final String pathO = "\\data\\bill-processed.txt";
 
-        users.add(new User("user 1"));
-        User user = new User("User 2");
-        users.add(user);
-        users.add(new User("user 3"));
-        users.add(user);
+        System.out.println(System.getProperty("user.dir")); // from env
 
-        users.forEach(System.out::println);
-        for (User player : users) {
-            System.out.println(Integer.toUnsignedString(player.hashCode()));
+        File fileI = new File(CWD+pathI);
+        File fileO = new File(CWD+pathO);
+        if (fileI.exists()) {
+            // read from sources
+            InputStream is = new FileInputStream(fileI);
+            byte[] content = is.readAllBytes();
+            String textContent = new String(content);
+            System.out.println(textContent);
+
+            // Write into destination file
+            OutputStream os = new FileOutputStream(fileO);
+            os.write(textContent.getBytes());
+            os.close();
+        } else {
+            System.out.println("File not found!");
         }
     }
 }
