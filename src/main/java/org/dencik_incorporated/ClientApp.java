@@ -1,8 +1,11 @@
 package org.dencik_incorporated;
 
+import java.io.ObjectOutputStream;
 import java.io.OutputStream;
+import java.io.Serializable;
 import java.net.Socket;
 import java.util.Scanner;
+import java.util.UUID;
 
 public class ClientApp {
     public static void main(String[] args) throws Exception {
@@ -12,9 +15,12 @@ public class ClientApp {
         System.out.println("Client connected to server!");
 
         OutputStream os = clientSocket.getOutputStream();
-        Scanner scanner = new Scanner(System.in);
-        String message = scanner.nextLine();
-        os.write(message.getBytes());
+        // decorate outputstream
+        ObjectOutputStream oos = new ObjectOutputStream(os);
+
+        Message message = new Message(UUID.randomUUID(), "Hello!");
+
+        oos.writeObject(message);
         os.close();
         clientSocket.close();
     }
