@@ -12,6 +12,7 @@ public class ClientApp {
         final int PORT = 20000;
         Socket clientSocket = new Socket("localhost", PORT);
 
+
         System.out.println("Client connected to server!");
 
         OutputStream os = clientSocket.getOutputStream();
