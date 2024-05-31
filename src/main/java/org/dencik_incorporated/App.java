@@ -21,28 +21,29 @@ public class App {
             InputStream is = new FileInputStream(fileI);
             byte[] content = is.readAllBytes();
             String textContent = new String(content);
-            StringBuffer processedContent = new StringBuffer();
             System.out.println(textContent);
 
             // text processing
             final String PATTERN = "(\\d+)(EUR)";
             Pattern pattern = Pattern.compile(PATTERN);
-            Matcher matcher = pattern.matcher(textContent);
-
-            while (matcher.find()) {
+            Matcher matcher;
+            do {
+                matcher = pattern.matcher(textContent);
+                if (!matcher.find()) {
+                    break;
+                }
                 Double amount = Double.valueOf(matcher.group(1));
                 String currency = matcher.group(2);
                 Double amountMDL = amount*RATE;
                 String replacement = String.format("%.2fMDL", amountMDL);
 
-                matcher.appendReplacement(processedContent, replacement);
-                System.out.println(currency);
-            }
-            matcher.appendTail(processedContent);
+                textContent = matcher.replaceFirst(replacement);
+                System.out.println(textContent);
+            } while (true);
 
             // Write into destination file
             OutputStream os = new FileOutputStream(fileO);
-            os.write(processedContent.toString().getBytes());
+            os.write(textContent.getBytes());
             os.close();
         } else {
             System.out.println("File not found!");
