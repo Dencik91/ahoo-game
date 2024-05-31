@@ -42,7 +42,7 @@
           <archive>
             <manifest>
               <addClasspath>true</addClasspath>
-              <mainClass>org.dencik_incorporated.App</mainClass>
+              <mainClass>org.dencik_incorporated.ServerApp</mainClass>
             </manifest>
           </archive>
         </configuration>
