@@ -21,6 +21,7 @@ public class ClientApp {
         Message message = new Message(UUID.randomUUID(), "Hello!");
 
         oos.writeObject(message);
+        new Scanner(System.in).next();
         os.close();
         clientSocket.close();
     }

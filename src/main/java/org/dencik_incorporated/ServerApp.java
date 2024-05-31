@@ -3,6 +3,7 @@ import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.Scanner;
 
 public class ServerApp {
     public static void main( String[] args ) throws Exception {
@@ -19,7 +20,7 @@ public class ServerApp {
         ObjectInputStream ois = new ObjectInputStream(is);
 
         Message message = (Message)ois.readObject();
-
+        new Scanner(System.in).next();
         ois.close();
         clientSocket.close();
 
