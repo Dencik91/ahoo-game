@@ -1,12 +1,16 @@
 package org.dencik_incorporated;
 
 import java.io.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.util.regex.PatternSyntaxException;
 
 public class App {
     public static void main( String[] args ) throws Exception {
         final String CWD = System.getProperty("user.dir");
         final String pathI = "\\data\\bill.txt";
         final String pathO = "\\data\\bill-processed.txt";
+        final Double RATE = 20.0;
 
         System.out.println(System.getProperty("user.dir")); // from env
 
@@ -17,11 +21,28 @@ public class App {
             InputStream is = new FileInputStream(fileI);
             byte[] content = is.readAllBytes();
             String textContent = new String(content);
+            StringBuffer processedContent = new StringBuffer();
             System.out.println(textContent);
+
+            // text processing
+            final String PATTERN = "(\\d+)(EUR)";
+            Pattern pattern = Pattern.compile(PATTERN);
+            Matcher matcher = pattern.matcher(textContent);
+
+            while (matcher.find()) {
+                Double amount = Double.valueOf(matcher.group(1));
+                String currency = matcher.group(2);
+                Double amountMDL = amount*RATE;
+                String replacement = String.format("%.2fMDL", amountMDL);
+
+                matcher.appendReplacement(processedContent, replacement);
+                System.out.println(currency);
+            }
+            matcher.appendTail(processedContent);
 
             // Write into destination file
             OutputStream os = new FileOutputStream(fileO);
-            os.write(textContent.getBytes());
+            os.write(processedContent.toString().getBytes());
             os.close();
         } else {
             System.out.println("File not found!");
