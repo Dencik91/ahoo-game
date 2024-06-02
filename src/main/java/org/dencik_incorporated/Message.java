@@ -26,6 +26,13 @@ public class Message implements Serializable {
         }
         this.body = jo.getString("body");
     }
+    // method that transform message object to JSON
+    public JSONObject toJson() {
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("id", this.id.toString());
+        jsonObject.put("body", this.body);
+        return jsonObject;
+    }
 
     public UUID getId() {
         return id;

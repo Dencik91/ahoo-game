@@ -1,6 +1,7 @@
 package org.dencik_incorporated;
-import java.io.InputStream;
-import java.io.ObjectInputStream;
+import org.json.JSONObject;
+
+import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.Scanner;
@@ -25,8 +26,13 @@ public class ServerApp {
         // print received messages
         System.out.println("Client:" + message.getId() + "Client sent: " + message.getBody());
         // write object message in JSON file
-
-
-
+        JSONObject messageJson = message.toJson();
+        // Try-with-resources construction that autoclose resources
+        try (PrintWriter printWriter = new PrintWriter(new FileOutputStream(
+                    System.getProperty("user.dir") + "\\src\\data\\message-output.json"))) {
+            // Pretty print JSON with indentation
+            printWriter.write(messageJson.toString(2));
+        }
+        serverSocket.close();
     }
 }
