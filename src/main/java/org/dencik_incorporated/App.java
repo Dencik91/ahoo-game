@@ -7,7 +7,8 @@ import org.w3c.dom.ls.LSOutput;
 
 public class App {
     public static void main(String[] args) throws Exception {
-        FileInputStream fis = new FileInputStream(new File(System.getProperty("user.dir") + "\\data\\message.json"));
+        FileInputStream fis = new FileInputStream(
+                new File(System.getProperty("user.dir") + "\\data\\message.json"));
 
         String textContent = new String(fis.readAllBytes());
 
