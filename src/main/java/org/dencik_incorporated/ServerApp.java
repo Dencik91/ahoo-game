@@ -20,7 +20,7 @@ public class ServerApp {
         ObjectInputStream ois = new ObjectInputStream(is);
 
         Message message = (Message)ois.readObject();
-        new Scanner(System.in).next();
+//        new Scanner(System.in).next();
         ois.close();
         clientSocket.close();
 

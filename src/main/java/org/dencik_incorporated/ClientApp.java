@@ -18,7 +18,7 @@ public class ClientApp {
         // decorate outputstream
         ObjectOutputStream oos = new ObjectOutputStream(os);
 
-        Message message = new Message(UUID.randomUUID(), "Hello!");
+        Message message = new Message(
 
         oos.writeObject(message);
         new Scanner(System.in).next();
