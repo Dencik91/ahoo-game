@@ -1,4 +1,7 @@
 package org.dencik_incorporated;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.Serial;
 import java.io.Serializable;
 import java.util.UUID;
@@ -14,14 +17,21 @@ public class Message implements Serializable {
         this.id = id;
         this.body = body;
     }
+    // Constructor for creating message object from JSON object
+    public Message(JSONObject jo) {
+        try {
+            this.id = UUID.fromString(jo.getString("id"));
+        } catch (IllegalArgumentException | JSONException e) {
+            this.id = UUID.randomUUID();
+        }
+        this.body = jo.getString("body");
+    }
 
     public UUID getId() {
         return id;
     }
 
-    public void setId(UUID id) {
-        this.id = id;
-    }
+    public void setId(UUID id) {this.id = id;}
 
     public String getBody() {
         return body;

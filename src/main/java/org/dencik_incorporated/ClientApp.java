@@ -22,16 +22,17 @@ public class ClientApp {
         ObjectOutputStream oos = new ObjectOutputStream(os);
         // create file input stream from json file
         FileInputStream fis = new FileInputStream(
-                System.getProperty("user.dir") + "\\data\\message.json");
+                System.getProperty("user.dir") + "\\src\\data\\message.json");
         // put all input in string
         String textContent = new String(fis.readAllBytes());
         // put string from input in json object
         JSONObject jo = new JSONObject(textContent);
-
-        Message message = new Message(
-
+        // create message object from jsonObject
+        Message message = new Message(jo);
+        // sent message object
         oos.writeObject(message);
-        new Scanner(System.in).next();
+        // close all session
+        fis.close();
         os.close();
         clientSocket.close();
     }

@@ -20,11 +20,13 @@ public class ServerApp {
         ObjectInputStream ois = new ObjectInputStream(is);
 
         Message message = (Message)ois.readObject();
-//        new Scanner(System.in).next();
         ois.close();
         clientSocket.close();
+        // print received messages
+        System.out.println("Client:" + message.getId() + "Client sent: " + message.getBody());
+        // write object message in JSON file
 
-        System.out.println("Client sent: " + message.getBody());
+
 
     }
 }
